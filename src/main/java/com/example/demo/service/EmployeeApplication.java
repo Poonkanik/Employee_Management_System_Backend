@@ -21,6 +21,10 @@ public class EmployeeApplication {
     }
 
     public Employee addEmployee(Employee employee) {
+        if (employee.getBackgroundCheck() == null)
+            employee.setBackgroundCheck(false);
+        if (employee.getDegreeVerification() == null)
+            employee.setDegreeVerification(false);
         return repo.save(employee);
     }
 
@@ -42,6 +46,10 @@ public class EmployeeApplication {
                     emp.setName(updatedEmployee.getName());
                     emp.setEmail(updatedEmployee.getEmail());
                     emp.setRole(updatedEmployee.getRole());
+                    emp.setExperience(updatedEmployee.getExperience());
+                    emp.setSalary(updatedEmployee.getSalary());
+                    emp.setBackgroundCheck(updatedEmployee.isBackgroundCheck());
+                    emp.setDegreeVerification(updatedEmployee.isDegreeVerification());
                     return repo.save(emp);
                 })
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
